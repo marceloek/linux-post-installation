@@ -12,7 +12,7 @@ PPA_PAPER_ICON="ppa:snwh/ppa"
 PPA_PAPIRUS_ICON="ppa:papirus/papirus"
 PPA_PADOKA_MESA="ppa:paulo-miguel-dias/pkppa"
 PPA_APLATTNER="ppa:aplattner/ppa"
-PPA_APPS"ppa:linuxuprising/apps"
+PPA_APPS="ppa:linuxuprising/apps"
 PPA_JAVA="ppa:linuxuprising/java"
 PPA_TLP="ppa:linrunner/tlp"
 PPA_NUMIX_ICON="ppa:numix/ppa"
@@ -125,20 +125,20 @@ sudo apt-add-repository "deb [arch=amd64] $URL_PPA_VSCODE stable main" -y
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
-# ---------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
 
-# ----------------------------- EXECUCAO ----------------------------- #
+# -------------------------------- EXECUCAO -------------------------------- #
 ## Atualizando o repositorio depois da adicao de novos repositorios ##
 sudo apt update -y
 
-## Download e instalacao de programas externos ##
+## -------------- Download e instalacao de programas externos ------------- ##
 mkdir "$DIRETORIO_DOWNLOADS"
 cd $DIRETORIO_DOWNLOADS
+wget -c "$URL_XAMPP" -O xampp.run
 wget -c "$URL_CPU_X" -O cpu-x.tar.gz
 tar -xf cpu-x.tar.gz
 cd xUbuntu_18.04/amd64
-cd
-wget -c "$URL_XAMPP"
+cd $HOME/Desktop
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_YOUTUBE_MP3"      -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OPERA"               -P "$DIRETORIO_DOWNLOADS"
@@ -146,13 +146,14 @@ wget -c "$URL_DISCORD"             -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_UGET"                -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OOMOX"               -P "$DIRETORIO_DOWNLOADS"
 
-## Instalando pacotes .deb baixados na sessão anterior ##
+## ---------- Instalando pacotes .deb baixados na sessão anterior --------- ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
 sudo apt-get --fix-broken install
 
-# Instalar programas no apt
+# ------------------------ Instalar programas no apt ----------------------- #
 for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
-  if ! dpkg -l | grep -q $nome_do_programa; then # Somente instala se nao estiver instalado
+  # Somente instala se nao estiver instalado
+  if ! dpkg -l | grep -q $nome_do_programa; then          
     apt install "$nome_do_programa" -y
   else
     echo "[INSTALADO] - $nome_do_programa"
@@ -161,13 +162,13 @@ done
 
 ## Instalando pacotes Snap ##
 sudo snap install photogimp
-# ---------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
 
 # ----------------------------- POS-INSTALACAO ----------------------------- #
-## Finalização, atualização e limpeza##
+## ------------------ Finalizacao, atualizacoa e limpeza ------------------ ##
 sudo apt update && sudo apt dist-upgrade -y
 sudo flatpak remove --all
 sudo apt purge flatpak -y
 sudo apt autoclean
 sudo apt autoremove -y
-# ---------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
