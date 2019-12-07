@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ----------------------------- VARIÁVEIS ----------------------------- #
+# ----------------------------- VARIAVEIS ----------------------------- #
 PPA_LIBRATBAG="ppa:libratbag-piper/piper-libratbag-git"
 PPA_LUTRIS="ppa:lutris-team/lutris"
 PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
@@ -17,6 +17,7 @@ PPA_JAVA="ppa:linuxuprising/java"
 PPA_TLP="ppa:linrunner/tlp"
 PPA_NUMIX_ICON="ppa:numix/ppa"
 
+URL_XAMPP="https://www.apachefriends.org/xampp-files/7.3.12/xampp-linux-x64-7.3.12-0-installer.run"
 URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
 URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
 URL_PPA_VSCODE="https://packages.microsoft.com/repos/vscode"
@@ -32,21 +33,21 @@ URL_OOMOX="https://github.com/themix-project/oomox/releases/download/1.12.5/oomo
 DIRETORIO_DOWNLOADS="$HOME/Desktop/programas"
 
 PROGRAMAS_PARA_INSTALAR=(
-  audacity            # editor de audio
-  snapd               # snap
-  mint-meta-codecs    # codecs e vlc
-  winff               # conversor de video
-  flameshot           # print screen
-  codecs              # editor de codigo
-  postgresql          # db postgresql
-  bleachbit           # gerencia limpeza de arquivos
-  steam-installer     # steam
+  audacity                    # editor de audio
+  snapd                       # snap
+  mint-meta-codecs            # codecs e vlc
+  winff                       # conversor de video
+  flameshot                   # print screen
+  codecs                      # editor de codigo
+  postgresql                  # db postgresql
+  bleachbit                   # gerencia limpeza de arquivos
+  steam-installer             # steam
   steam-devices
   steam:i386
-  ratbagd             # depedencia do piper
-  piper               # gerenciador de mouse
-  lutris              # gerenciador de jogos linux
-  libvulkan1          # os demais dependencias 
+  ratbagd                     # depedencia do piper
+  piper                       # gerenciador de mouse
+  lutris                      # gerenciador de jogos linux
+  libvulkan1                  # demais dependencias 
   libvulkan1:i386
   libgnutls30:i386
   libldap-2.4-2:i386
@@ -61,10 +62,10 @@ PROGRAMAS_PARA_INSTALAR=(
   apt-transport-https 
   wget
   build-essential 
-  git                 # git
-  python3             # linguagem python3
-  python-pip          # utilitario pip
-  gcc
+  git                         # git
+  python3                     # linguagem python3
+  python-pip                  # utilitario pip
+  gcc                         # todos os gcc's
   g++
   gcc-5
   g++-5
@@ -76,16 +77,17 @@ PROGRAMAS_PARA_INSTALAR=(
   g++-8
   gcc-9
   g++-9
-  chromium-browser
-  gparted
-  obs-studio
-  grub-customizer
-  inkscape
-  papirus-icon-theme
-  paper-icon-theme
-  tlp
-  qbittorrent
-  telegram-desktop 
+  chromium-browser            # navegador chromium
+  gparted                     # gerenciador de particoes
+  obs-studio                  # gravador de video
+  grub-customizer             # gerenciador de grub
+  inkscape                    # gerenciar de imagens .svg
+  papirus-icon-theme          # tema de icones papirus
+  paper-icon-theme            # tema de icones paper
+  tlp                         # auxiliador duracao da bateria
+  qbittorrent                 # gerenciador torrent
+  telegram-desktop            # telegram para pc 
+  hardinfo                    # visualizador de hardware do sistema 
 )
 # ---------------------------------------------------------------------- #
 
@@ -97,10 +99,10 @@ sudo rm /var/cache/apt/archives/lock
 ## Adicionando/Confirmando arquitetura de 32 bits ##
 sudo dpkg --add-architecture i386
 
-## Atualizando o repositório ##
+## Atualizando o repositorio ##
 sudo apt update -y
 
-## Adicionando repositórios de terceiros e suporte a Snap (Driver Logitech, Lutris e Drivers Nvidia)##
+## Adicionando repositorios de terceiros e suporte a Snap (Driver Logitech, Lutris e Drivers Nvidia)##
 sudo apt-add-repository "$PPA_LIBRATBAG" -y
 sudo apt-add-repository "$PPA_LUTRIS" -y
 sudo apt-add-repository "$PPA_GRAPHICS_DRIVERS" -y
@@ -125,13 +127,18 @@ sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
 # ---------------------------------------------------------------------- #
 
-# ----------------------------- EXECUÇÃO ----------------------------- #
-## Atualizando o repositório depois da adição de novos repositórios ##
+# ----------------------------- EXECUCAO ----------------------------- #
+## Atualizando o repositorio depois da adicao de novos repositorios ##
 sudo apt update -y
 
-## Download e instalaçao de programas externos ##
+## Download e instalacao de programas externos ##
 mkdir "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_CPU_X"
+cd $DIRETORIO_DOWNLOADS
+wget -c "$URL_CPU_X" -O cpu-x.tar.gz
+tar -xf cpu-x.tar.gz
+cd xUbuntu_18.04/amd64
+cd
+wget -c "$URL_XAMPP"
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_YOUTUBE_MP3"      -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OPERA"               -P "$DIRETORIO_DOWNLOADS"
@@ -141,10 +148,11 @@ wget -c "$URL_OOMOX"               -P "$DIRETORIO_DOWNLOADS"
 
 ## Instalando pacotes .deb baixados na sessão anterior ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
+sudo apt-get --fix-broken install
 
 # Instalar programas no apt
 for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
-  if ! dpkg -l | grep -q $nome_do_programa; then # Só instala se já não estiver instalado
+  if ! dpkg -l | grep -q $nome_do_programa; then # Somente instala se nao estiver instalado
     apt install "$nome_do_programa" -y
   else
     echo "[INSTALADO] - $nome_do_programa"
@@ -155,7 +163,7 @@ done
 sudo snap install photogimp
 # ---------------------------------------------------------------------- #
 
-# ----------------------------- PÓS-INSTALAÇÃO ----------------------------- #
+# ----------------------------- POS-INSTALACAO ----------------------------- #
 ## Finalização, atualização e limpeza##
 sudo apt update && sudo apt dist-upgrade -y
 sudo flatpak remove --all
