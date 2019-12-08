@@ -17,11 +17,11 @@ PPA_JAVA="ppa:linuxuprising/java"
 PPA_TLP="ppa:linrunner/tlp"
 PPA_NUMIX_ICON="ppa:numix/ppa"
 
+URL_VSCODE_KEY="https://packages.microsoft.com/keys/microsoft.asc"
+URL_PPA_VSCODE="https://packages.microsoft.com/repos/vscode"
 URL_XAMPP="https://www.apachefriends.org/xampp-files/7.3.12/xampp-linux-x64-7.3.12-0-installer.run"
 URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
 URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
-URL_PPA_VSCODE="https://packages.microsoft.com/repos/vscode"
-URL_VSCODE_KEY="https://packages.microsoft.com/keys/microsoft.asc"
 URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.10.1-1_amd64.deb"
 URL_4K_YOUTUBE_MP3="https://dl.4kdownload.com/app/4kyoutubetomp3_3.9.1-1_amd64.deb"
 URL_OPERA="https://download3.operacdn.com/pub/opera/desktop/65.0.3467.62/linux/opera-stable_65.0.3467.62_amd64.deb"
@@ -139,17 +139,16 @@ sudo apt update -y
 ## -------------- Download e instalacao de programas externos ------------- ##
 mkdir "$DIRETORIO_DOWNLOADS"
 cd $DIRETORIO_DOWNLOADS
+wget -c "$URL_OOMOX"
+wget -c "$URL_DISCORD"
 wget -c "$URL_XAMPP" -O xampp.run
 wget -c "$URL_CPU_X" -O cpu-x.tar.gz
 tar -xf cpu-x.tar.gz
-cd xUbuntu_18.04/amd64
 cd $HOME/Desktop
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_YOUTUBE_MP3"      -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OPERA"               -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_DISCORD"             -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_UGET"                -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_OOMOX"               -P "$DIRETORIO_DOWNLOADS"
 
 ## ---------- Instalando pacotes .deb baixados na sessão anterior --------- ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
@@ -172,7 +171,7 @@ sudo snap install photogimp
 # ----------------------------- POS-INSTALACAO ----------------------------- #
 ## ------------------ Finalizacao, atualizacao e limpeza ------------------ ##
 sudo apt purge flatpak rhythmbox thunderbird hexchat celluloid transmission-gtk -y
-sudo ubuntu-drivers autoinstall
+# sudo ubuntu-drivers autoinstall
 sudo mintupdate-cli upgrade -r -k -y
 sudo apt update && sudo apt dist-upgrade -y
 sudo flatpak remove --all
