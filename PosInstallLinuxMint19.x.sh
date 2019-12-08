@@ -17,8 +17,6 @@ PPA_JAVA="ppa:linuxuprising/java"
 PPA_TLP="ppa:linrunner/tlp"
 PPA_NUMIX_ICON="ppa:numix/ppa"
 
-URL_VSCODE_KEY="https://packages.microsoft.com/keys/microsoft.asc"
-URL_PPA_VSCODE="https://packages.microsoft.com/repos/vscode"
 URL_XAMPP="https://www.apachefriends.org/xampp-files/7.3.12/xampp-linux-x64-7.3.12-0-installer.run"
 URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
 URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
@@ -29,8 +27,10 @@ URL_CPU_X="https://github.com/X0rg/CPU-X/releases/download/v3.2.4/CPU-X_v3.2.4_U
 URL_DISCORD="https://dl.discordapp.net/apps/linux/0.0.9/discord-0.0.9.deb"
 URL_UGET="https://razaoinfo.dl.sourceforge.net/project/urlget/uget%20%28stable%29/2.2.1/uget_2.2.1-0ubuntu0~bionic_amd64.deb"
 URL_OOMOX="https://github.com/themix-project/oomox/releases/download/1.12.5/oomox_1.12.5_17.04+.deb"
+URL_VSCODE="https://az764295.vo.msecnd.net/stable/f359dd69833dd8800b54d458f6d37ab7c78df520/code_1.40.2-1574694120_amd64.deb"
 
 DIRETORIO_DOWNLOADS="$HOME/Desktop/programas"
+DIRETORIO_DESKTOP="$HOME/Desktop"
 
 PROGRAMAS_PARA_INSTALAR=(
     audacity                    # editor de audio
@@ -92,7 +92,7 @@ PROGRAMAS_PARA_INSTALAR=(
     code                        # editor de codigo
     nvidia-settings             # painel nvidia
     screenfetch                 # visualizador de hardware pelo bash
-    screen
+    screen                      # utilitario para instalacao de drivers
 )
 # ---------------------------------------------------------------------- #
 
@@ -124,9 +124,6 @@ sudo apt-add-repository "$PPA_APPS" -y
 sudo apt-add-repository "$PPA_JAVA" -y 
 sudo apt-add-repository "$PPA_TLP" -y
 sudo apt-add-repository "$PPA_NUMIX_ICON" -y 
-sudo sh -c 'echo "deb [arch=amd64] $URL_PPA_VSCODE stable main" > /etc/apt/sources.list.d/vscode.list'
-curl "$URL_VSCODE_KEY" | gpg --dearmor > microsoft.gpg
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
@@ -137,18 +134,18 @@ sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
 sudo apt update -y
 
 ## -------------- Download e instalacao de programas externos ------------- ##
-mkdir "$DIRETORIO_DOWNLOADS"
-cd $DIRETORIO_DOWNLOADS
+cd $DIRETORIO_DESKTOP
 wget -c "$URL_OOMOX"
 wget -c "$URL_DISCORD"
 wget -c "$URL_XAMPP" -O xampp.run
 wget -c "$URL_CPU_X" -O cpu-x.tar.gz
 tar -xf cpu-x.tar.gz
-cd $HOME/Desktop
+mkdir "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_YOUTUBE_MP3"      -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OPERA"               -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_UGET"                -P "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_VSCODE"              -P "$DIRETORIO_DOWNLOADS"
 
 ## ---------- Instalando pacotes .deb baixados na sessão anterior --------- ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
@@ -170,7 +167,7 @@ sudo snap install photogimp
 
 # ----------------------------- POS-INSTALACAO ----------------------------- #
 ## ------------------ Finalizacao, atualizacao e limpeza ------------------ ##
-sudo apt purge flatpak rhythmbox thunderbird hexchat celluloid transmission-gtk -y
+sudo apt purge flatpak rhythmbox thunderbird hexchat xplayer xviewer transmission-gtk -y
 # sudo ubuntu-drivers autoinstall
 sudo mintupdate-cli upgrade -r -k -y
 sudo apt update && sudo apt dist-upgrade -y
