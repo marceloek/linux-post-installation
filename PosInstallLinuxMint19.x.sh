@@ -93,6 +93,7 @@ PROGRAMAS_PARA_INSTALAR=(
     nvidia-settings             # painel nvidia
     screenfetch                 # visualizador de hardware pelo bash
     screen                      # utilitario para instalacao de drivers
+    ttf-mscorefonts-installer   # fontes de letras da microsoft
 )
 # ---------------------------------------------------------------------- #
 
