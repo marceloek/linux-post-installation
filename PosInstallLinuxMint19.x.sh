@@ -33,61 +33,66 @@ URL_OOMOX="https://github.com/themix-project/oomox/releases/download/1.12.5/oomo
 DIRETORIO_DOWNLOADS="$HOME/Desktop/programas"
 
 PROGRAMAS_PARA_INSTALAR=(
-  audacity                    # editor de audio
-  snapd                       # snap
-  mint-meta-codecs            # codecs e vlc
-  winff                       # conversor de video
-  flameshot                   # print screen
-  codecs                      # editor de codigo
-  postgresql                  # db postgresql
-  bleachbit                   # gerencia limpeza de arquivos
-  steam-installer             # steam
-  steam-devices
-  steam:i386
-  ratbagd                     # depedencia do piper
-  piper                       # gerenciador de mouse
-  lutris                      # gerenciador de jogos linux
-  libvulkan1                  # demais dependencias 
-  libvulkan1:i386
-  libgnutls30:i386
-  libldap-2.4-2:i386
-  libgpg-error0:i386
-  libxml2:i386
-  libasound2-plugins:i386
-  libsdl2-2.0-0:i386
-  libfreetype6:i386
-  libdbus-1-3:i386
-  libsqlite3-0:i386
-  software-properties-common 
-  apt-transport-https 
-  wget
-  build-essential 
-  git                         # git
-  python3                     # linguagem python3
-  python-pip                  # utilitario pip
-  gcc                         # todos os gcc's
-  g++
-  gcc-5
-  g++-5
-  gcc-6
-  g++-6
-  gcc-7
-  g++-7
-  gcc-8
-  g++-8
-  gcc-9
-  g++-9
-  chromium-browser            # navegador chromium
-  gparted                     # gerenciador de particoes
-  obs-studio                  # gravador de video
-  grub-customizer             # gerenciador de grub
-  inkscape                    # gerenciar de imagens .svg
-  papirus-icon-theme          # tema de icones papirus
-  paper-icon-theme            # tema de icones paper
-  tlp                         # auxiliador duracao da bateria
-  qbittorrent                 # gerenciador torrent
-  telegram-desktop            # telegram para pc 
-  hardinfo                    # visualizador de hardware do sistema 
+    audacity                    # editor de audio
+    snapd                       # snap
+    mint-meta-codecs            # codecs e vlc
+    winff                       # conversor de video
+    flameshot                   # print screen
+    codecs                      # editor de codigo
+    postgresql                  # db postgresql
+    bleachbit                   # gerencia limpeza de arquivos
+    steam-installer             # steam
+    steam-devices
+    steam:i386
+    ratbagd                     # depedencia do piper
+    piper                       # gerenciador de mouse
+    lutris                      # gerenciador de jogos linux
+    libvulkan1                  # demais dependencias 
+    libvulkan1:i386
+    libgnutls30:i386
+    libldap-2.4-2:i386
+    libgpg-error0:i386
+    libxml2:i386
+    libasound2-plugins:i386
+    libsdl2-2.0-0:i386
+    libfreetype6:i386
+    libdbus-1-3:i386
+    libsqlite3-0:i386
+    software-properties-common 
+    apt-transport-https 
+    wget
+    build-essential 
+    git                         # git
+    python3                     # linguagem python3
+    python-pip                  # utilitario pip
+    gcc                         # todos os gcc's
+    g++
+    gcc-5
+    g++-5
+    gcc-6
+    g++-6
+    gcc-7
+    g++-7
+    gcc-8
+    g++-8
+    gcc-9
+    g++-9
+    chromium-browser            # navegador chromium
+    gparted                     # gerenciador de particoes
+    obs-studio                  # gravador de video
+    grub-customizer             # gerenciador de grub
+    inkscape                    # gerenciar de imagens .svg
+    papirus-icon-theme          # tema de icones papirus
+    paper-icon-theme            # tema de icones paper
+    tlp                         # auxiliador duracao da bateria
+    qbittorrent                 # gerenciador torrent
+    telegram-desktop            # telegram para pc 
+    hardinfo                    # visualizador de hardware do sistema 
+    samba                       # compartilhador de pastas
+    code                        # editor de codigo
+    nvidia-settings             # painel nvidia
+    screenfetch                 # visualizador de hardware pelo bash
+    screen
 )
 # ---------------------------------------------------------------------- #
 
@@ -119,9 +124,9 @@ sudo apt-add-repository "$PPA_APPS" -y
 sudo apt-add-repository "$PPA_JAVA" -y 
 sudo apt-add-repository "$PPA_TLP" -y
 sudo apt-add-repository "$PPA_NUMIX_ICON" -y 
-wget -q "$URL_VSCODE_KEY" -O-
-sudo apt-key add microsoft.asc
-sudo apt-add-repository "deb [arch=amd64] $URL_PPA_VSCODE stable main" -y
+sudo sh -c 'echo "deb [arch=amd64] $URL_PPA_VSCODE stable main" > /etc/apt/sources.list.d/vscode.list'
+curl "$URL_VSCODE_KEY" | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
@@ -148,7 +153,7 @@ wget -c "$URL_OOMOX"               -P "$DIRETORIO_DOWNLOADS"
 
 ## ---------- Instalando pacotes .deb baixados na sessão anterior --------- ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
-sudo apt-get --fix-broken install
+sudo apt-get --fix-broken install -y
 
 # ------------------------ Instalar programas no apt ----------------------- #
 for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
@@ -165,10 +170,12 @@ sudo snap install photogimp
 # -------------------------------------------------------------------------- #
 
 # ----------------------------- POS-INSTALACAO ----------------------------- #
-## ------------------ Finalizacao, atualizacoa e limpeza ------------------ ##
+## ------------------ Finalizacao, atualizacao e limpeza ------------------ ##
+sudo apt purge flatpak rhythmbox thunderbird hexchat celluloid transmission-gtk -y
+sudo ubuntu-drivers autoinstall
+sudo mintupdate-cli upgrade -r -k -y
 sudo apt update && sudo apt dist-upgrade -y
 sudo flatpak remove --all
-sudo apt purge flatpak -y
 sudo apt autoclean
 sudo apt autoremove -y
 # -------------------------------------------------------------------------- #
