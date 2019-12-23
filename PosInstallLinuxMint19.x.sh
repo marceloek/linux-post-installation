@@ -136,7 +136,7 @@ sudo apt update -y
 
 ## -------------- Download e instalacao de programas externos ------------- ##
 cd $DIRETORIO_DESKTOP
-wget -c "$URL_OOMOX"
+#wget -c "$URL_OOMOX"
 wget -c "$URL_DISCORD"
 wget -c "$URL_XAMPP" -O xampp.run
 wget -c "$URL_CPU_X" -O cpu-x.tar.gz
@@ -163,12 +163,12 @@ for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
 done
 
 ## Instalando pacotes Snap ##
-sudo snap install photogimp
+#sudo snap install photogimp
 # -------------------------------------------------------------------------- #
 
 # ----------------------------- POS-INSTALACAO ----------------------------- #
 ## ------------------ Finalizacao, atualizacao e limpeza ------------------ ##
-sudo apt purge flatpak rhythmbox thunderbird hexchat xplayer xviewer transmission-gtk -y
+sudo apt purge flatpak rhythmbox thunderbird hexchat celluloid xviewer transmission-gtk -y
 # sudo ubuntu-drivers autoinstall
 sudo mintupdate-cli upgrade -r -k -y
 sudo apt update && sudo apt dist-upgrade -y
