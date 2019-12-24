@@ -15,19 +15,20 @@ PPA_APLATTNER="ppa:aplattner/ppa"
 PPA_APPS="ppa:linuxuprising/apps"
 PPA_JAVA="ppa:linuxuprising/java"
 PPA_TLP="ppa:linrunner/tlp"
-PPA_NUMIX_ICON="ppa:numix/ppa"
+PPA_UGET="ppa:plushuang-tw/uget-stable"
 
 URL_XAMPP="https://www.apachefriends.org/xampp-files/7.3.12/xampp-linux-x64-7.3.12-0-installer.run"
 URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
 URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
 URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.10.1-1_amd64.deb"
-URL_4K_YOUTUBE_MP3="https://dl.4kdownload.com/app/4kyoutubetomp3_3.9.1-1_amd64.deb"
+URL_4K_YOUTUBE_MP3="https://dl.4kdownload.com/app/4kyoutubetomp3_3.10.1-1_amd64.deb?source=website"
 URL_OPERA="https://download3.operacdn.com/pub/opera/desktop/65.0.3467.62/linux/opera-stable_65.0.3467.62_amd64.deb"
 URL_CPU_X="https://github.com/X0rg/CPU-X/releases/download/v3.2.4/CPU-X_v3.2.4_Ubuntu.tar.gz"
 URL_DISCORD="https://dl.discordapp.net/apps/linux/0.0.9/discord-0.0.9.deb"
 URL_UGET="https://razaoinfo.dl.sourceforge.net/project/urlget/uget%20%28stable%29/2.2.1/uget_2.2.1-0ubuntu0~bionic_amd64.deb"
 URL_OOMOX="https://github.com/themix-project/oomox/releases/download/1.12.5/oomox_1.12.5_17.04+.deb"
-URL_VSCODE="https://az764295.vo.msecnd.net/stable/f359dd69833dd8800b54d458f6d37ab7c78df520/code_1.40.2-1574694120_amd64.deb"
+URL_VSCODE="https://az764295.vo.msecnd.net/stable/26076a4de974ead31f97692a0d32f90d735645c0/code_1.41.1-1576681836_amd64.deb"
+URL_LIBRE_OFFICE="https://download.documentfoundation.org/libreoffice/stable/6.3.4/deb/x86_64/LibreOffice_6.3.4_Linux_x86-64_deb.tar.gz"
 
 DIRETORIO_DOWNLOADS="$HOME/Desktop/programas"
 DIRETORIO_DESKTOP="$HOME/Desktop"
@@ -38,7 +39,6 @@ PROGRAMAS_PARA_INSTALAR=(
     mint-meta-codecs            # codecs e vlc
     winff                       # conversor de video
     flameshot                   # print screen
-    codecs                      # editor de codigo
     postgresql                  # db postgresql
     bleachbit                   # gerencia limpeza de arquivos
     steam-installer             # steam
@@ -60,10 +60,12 @@ PROGRAMAS_PARA_INSTALAR=(
     libsqlite3-0:i386
     software-properties-common 
     apt-transport-https 
-    wget
+    wget                        # idm free-source
+    aria2                       
     build-essential 
     git                         # git
     python3                     # linguagem python3
+    python3.7                   # linguagem python3 versao 3.7
     python-pip                  # utilitario pip
     gcc                         # todos os gcc's
     g++
@@ -87,13 +89,16 @@ PROGRAMAS_PARA_INSTALAR=(
     tlp                         # auxiliador duracao da bateria
     qbittorrent                 # gerenciador torrent
     telegram-desktop            # telegram para pc 
+    whatsapp-desktop            # whatsapp para pc
     hardinfo                    # visualizador de hardware do sistema 
     samba                       # compartilhador de pastas
-    code                        # editor de codigo
     nvidia-settings             # painel nvidia
     screenfetch                 # visualizador de hardware pelo bash
     screen                      # utilitario para instalacao de drivers
     ttf-mscorefonts-installer   # fontes de letras da microsoft
+    jstest-gtk                  # verifica o reconhecimento dos botoes do controle do xbox
+    xboxdrv                     # service necessario para a coneccao do contole do xbox
+    sysfsutils                  # service necessario para edicao do arquivo sysfs/etc/sysfs.conf e incluir ao seu final a linha: /module/bluetooth/parameters/disable_ertm=1
 )
 # ---------------------------------------------------------------------- #
 
@@ -123,8 +128,8 @@ sudo apt-add-repository "$PPA_PADOKA_MESA" -y
 sudo apt-add-repository "$PPA_APLATTNER" -y 
 sudo apt-add-repository "$PPA_APPS" -y 
 sudo apt-add-repository "$PPA_JAVA" -y 
-sudo apt-add-repository "$PPA_TLP" -y
-sudo apt-add-repository "$PPA_NUMIX_ICON" -y 
+sudo apt-add-repository "$PPA_TLP" -y 
+sudo apt-add-repository "$PPA_UGET" -y
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
@@ -138,6 +143,7 @@ sudo apt update -y
 cd $DIRETORIO_DESKTOP
 #wget -c "$URL_OOMOX"
 wget -c "$URL_DISCORD"
+wget -c "$URL_LIBRE_OFFICE"
 wget -c "$URL_XAMPP" -O xampp.run
 wget -c "$URL_CPU_X" -O cpu-x.tar.gz
 tar -xf cpu-x.tar.gz
