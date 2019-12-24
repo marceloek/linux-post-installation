@@ -60,7 +60,7 @@ PROGRAMAS_PARA_INSTALAR=(
     libsqlite3-0:i386
     software-properties-common 
     apt-transport-https 
-    wget                        # idm free-source
+    uget                        # idm free-source
     aria2                       
     build-essential 
     git                         # git
