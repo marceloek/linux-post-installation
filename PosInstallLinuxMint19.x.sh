@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 # ----------------------------- VARIAVEIS ----------------------------- #
-PPA_LIBRATBAG="ppa:libratbag-piper/piper-libratbag-git"
-PPA_LUTRIS="ppa:lutris-team/lutris"
-PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
-PPA_PYTHON="ppa:deadsnakes/ppa"
-PPA_AUDACITY="ppa:ubuntuhandbook1/audacity"
-PPA_OBS="ppa:obsproject/obs-studio"
-PPA_GRUB_CUSTOMIZER="ppa:danielrichter2007/grub-customizer"
-PPA_INKSCAPE="ppa:inkscape.dev/stable"
-PPA_PAPER_ICON="ppa:snwh/ppa"
-PPA_PAPIRUS_ICON="ppa:papirus/papirus"
-PPA_PADOKA_MESA="ppa:paulo-miguel-dias/pkppa"
 PPA_APLATTNER="ppa:aplattner/ppa"
+PPA_GRUB_CUSTOMIZER="ppa:danielrichter2007/grub-customizer"
+PPA_PYTHON="ppa:deadsnakes/ppa"
+PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
+PPA_INKSCAPE="ppa:inkscape.dev/stable"
+PPA_LIBRATBAG="ppa:libratbag-piper/piper-libratbag-git"
+PPA_TLP="ppa:linrunner/tlp"
 PPA_APPS="ppa:linuxuprising/apps"
 PPA_JAVA="ppa:linuxuprising/java"
-PPA_TLP="ppa:linrunner/tlp"
+PPA_LUTRIS="ppa:lutris-team/lutris"
+PPA_OBS="ppa:obsproject/obs-studio"
+PPA_PAPIRUS_ICON="ppa:papirus/papirus"
+PPA_PADOKA_MESA="ppa:paulo-miguel-dias/pkppa"
 PPA_UGET="ppa:plushuang-tw/uget-stable"
+PPA_PAPER_ICON="ppa:snwh/ppa"
+PPA_AUDACITY="ppa:ubuntuhandbook1/audacity"
 
 URL_XAMPP="https://www.apachefriends.org/xampp-files/7.3.12/xampp-linux-x64-7.3.12-0-installer.run"
 URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
@@ -169,7 +169,7 @@ for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
 done
 
 ## Instalando pacotes Snap ##
-#sudo snap install photogimp
+sudo snap install blender --classic
 # -------------------------------------------------------------------------- #
 
 # ----------------------------- POS-INSTALACAO ----------------------------- #
