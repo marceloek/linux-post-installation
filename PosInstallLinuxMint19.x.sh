@@ -14,6 +14,7 @@ PPA_OBS="ppa:obsproject/obs-studio"
 PPA_PAPIRUS_ICON="ppa:papirus/papirus"
 PPA_PADOKA_MESA="ppa:paulo-miguel-dias/pkppa"
 PPA_UGET="ppa:plushuang-tw/uget-stable"
+PPA_QBITTORRENT="ppa:qbittorrent-team/qbittorrent-stable"
 PPA_PAPER_ICON="ppa:snwh/ppa"
 PPA_AUDACITY="ppa:ubuntuhandbook1/audacity"
 
@@ -130,6 +131,7 @@ sudo apt-add-repository "$PPA_APPS" -y
 sudo apt-add-repository "$PPA_JAVA" -y 
 sudo apt-add-repository "$PPA_TLP" -y 
 sudo apt-add-repository "$PPA_UGET" -y
+sudo apt-add-repository "$PPA_QBITTORRENT" -y
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
