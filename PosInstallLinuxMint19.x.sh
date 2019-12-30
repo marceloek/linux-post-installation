@@ -170,6 +170,9 @@ for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
   fi
 done
 
+## Wine Staging ##
+sudo apt install --install-recommends winehq-staging wine-staging wine-staging-i386 wine-staging-amd64 -y
+
 ## Instalando pacotes Snap ##
 sudo snap install blender --classic
 # -------------------------------------------------------------------------- #
