@@ -27,7 +27,7 @@ URL_OPERA="https://download3.operacdn.com/pub/opera/desktop/65.0.3467.62/linux/o
 URL_CPU_X="https://github.com/X0rg/CPU-X/releases/download/v3.2.4/CPU-X_v3.2.4_Ubuntu.tar.gz"
 URL_DISCORD="https://dl.discordapp.net/apps/linux/0.0.9/discord-0.0.9.deb"
 URL_UGET="https://razaoinfo.dl.sourceforge.net/project/urlget/uget%20%28stable%29/2.2.1/uget_2.2.1-0ubuntu0~bionic_amd64.deb"
-URL_OOMOX="https://github.com/themix-project/oomox/releases/download/1.12.5/oomox_1.12.5_17.04+.deb"
+URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 URL_VSCODE="https://az764295.vo.msecnd.net/stable/26076a4de974ead31f97692a0d32f90d735645c0/code_1.41.1-1576681836_amd64.deb"
 URL_LIBRE_OFFICE="https://download.documentfoundation.org/libreoffice/stable/6.3.4/deb/x86_64/LibreOffice_6.3.4_Linux_x86-64_deb.tar.gz"
 
@@ -143,13 +143,13 @@ sudo apt update -y
 
 ## -------------- Download e instalacao de programas externos ------------- ##
 cd $DIRETORIO_DESKTOP
-#wget -c "$URL_OOMOX"
 wget -c "$URL_DISCORD"
 wget -c "$URL_LIBRE_OFFICE"
 wget -c "$URL_XAMPP" -O xampp.run
 wget -c "$URL_CPU_X" -O cpu-x.tar.gz
 tar -xf cpu-x.tar.gz
 mkdir "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_GOOGLE_CHROME"       -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_YOUTUBE_MP3"      -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OPERA"               -P "$DIRETORIO_DOWNLOADS"
@@ -176,11 +176,11 @@ sudo snap install blender --classic
 
 # ----------------------------- POS-INSTALACAO ----------------------------- #
 ## ------------------ Finalizacao, atualizacao e limpeza ------------------ ##
+sudo flatpak remove --all
 sudo apt purge flatpak rhythmbox thunderbird hexchat celluloid xviewer transmission-gtk -y
 # sudo ubuntu-drivers autoinstall
 sudo mintupdate-cli upgrade -r -k -y
 sudo apt update && sudo apt dist-upgrade -y
-sudo flatpak remove --all
 sudo apt autoclean
 sudo apt autoremove -y
 # -------------------------------------------------------------------------- #
