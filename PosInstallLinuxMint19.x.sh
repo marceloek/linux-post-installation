@@ -6,7 +6,6 @@ PPA_PYTHON="ppa:deadsnakes/ppa"
 PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
 PPA_INKSCAPE="ppa:inkscape.dev/stable"
 PPA_LIBRATBAG="ppa:libratbag-piper/piper-libratbag-git"
-PPA_TLP="ppa:linrunner/tlp"
 PPA_APPS="ppa:linuxuprising/apps"
 PPA_JAVA="ppa:linuxuprising/java"
 PPA_LUTRIS="ppa:lutris-team/lutris"
@@ -30,6 +29,7 @@ URL_UGET="https://razaoinfo.dl.sourceforge.net/project/urlget/uget%20%28stable%2
 URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 URL_VSCODE="https://az764295.vo.msecnd.net/stable/26076a4de974ead31f97692a0d32f90d735645c0/code_1.41.1-1576681836_amd64.deb"
 URL_LIBRE_OFFICE="https://download.documentfoundation.org/libreoffice/stable/6.3.4/deb/x86_64/LibreOffice_6.3.4_Linux_x86-64_deb.tar.gz"
+URL_BLEACHBIT="https://download.bleachbit.org/bleachbit_3.0_all_ubuntu1804.deb"
 
 DIRETORIO_DOWNLOADS="$HOME/Desktop/programas"
 DIRETORIO_DESKTOP="$HOME/Desktop"
@@ -41,7 +41,6 @@ PROGRAMAS_PARA_INSTALAR=(
     winff                       # conversor de video
     flameshot                   # print screen
     postgresql                  # db postgresql
-    bleachbit                   # gerencia limpeza de arquivos
     steam-installer             # steam
     steam-devices
     steam:i386
@@ -87,7 +86,6 @@ PROGRAMAS_PARA_INSTALAR=(
     inkscape                    # gerenciar de imagens .svg
     papirus-icon-theme          # tema de icones papirus
     paper-icon-theme            # tema de icones paper
-    tlp                         # auxiliador duracao da bateria
     qbittorrent                 # gerenciador torrent
     telegram-desktop            # telegram para pc 
     whatsapp-desktop            # whatsapp para pc
@@ -95,10 +93,9 @@ PROGRAMAS_PARA_INSTALAR=(
     samba                       # compartilhador de pastas
     nvidia-settings             # painel nvidia
     screenfetch                 # visualizador de hardware pelo bash
-    screen                      # utilitario para instalacao de drivers
     ttf-mscorefonts-installer   # fontes de letras da microsoft
     jstest-gtk                  # verifica o reconhecimento dos botoes do controle do xbox
-    xboxdrv                     # service necessario para a coneccao do contole do xbox
+    xboxdrv                     # service necessario para a coneccao do controle do xbox
     sysfsutils                  # service necessario para edicao do arquivo sysfs/etc/sysfs.conf e incluir ao seu final a linha: /module/bluetooth/parameters/disable_ertm=1
 )
 # ---------------------------------------------------------------------- #
@@ -155,6 +152,7 @@ wget -c "$URL_4K_YOUTUBE_MP3"      -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_OPERA"               -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_UGET"                -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_VSCODE"              -P "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_BLEACHBIT"           -P "$DIRETORIO_DOWNLOADS"
 
 ## ---------- Instalando pacotes .deb baixados na sessão anterior --------- ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
