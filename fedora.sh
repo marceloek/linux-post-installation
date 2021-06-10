@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # 0 - Configure DNF for faster download:
 # sudo nano /etc/dnf/dnf.
 #     Add the lines:
@@ -10,7 +10,9 @@ sudo dnf autoremove
 
 sudo dnf clean all
 
-sudo dnf upgrade
+sudo dnf check-update
+
+sudo dnf upgrade -y
 
 # 2 - Add the repositories RPM Fusion in Fedora 34:
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -38,14 +40,27 @@ sudo mv /etc/yum.repos.d/packages.microsoft.com_yumrepos_edge.repo /etc/yum.repo
 
 sudo dnf check-update
 
-sudo dnf install -y vlc steam qbitorrent audacity piper steam.i686 uget aria2 git neofetch sysfsutils samba gparted code gnome-extensions gnome-tweaks gnome-arch microsoft-edge-beta file-roller bleachbit cpu-x
+sudo dnf install -y vlc steam qbitorrent audacity piper steam.i686 uget aria2 git neofetch sysfsutils samba gparted code gnome-extensions gnome-tweaks microsoft-edge-beta file-roller bleachbit cpu-x
 
-sudo dnf in teamviewer.x86_64.
+sudo dnf in teamviewer.x86_64.rpm
 
 sudo chmod +x VMware-Player-16.1.2-17966106.x86_64.bundle
 sudo ./VMware-Player-16.1.2-17966106.x86_64.bundle
 
 # 5 - Remove useless softwares:
 sudo dnf rm gnome-photos gnome-boxes gnome-totem gnome-maps gnome-contacts gnome-cheese simple-scan libreoffice*
+
+# 6 - Install customization (icon, cursor and material design themes)
+git clone https://github.com/vinceliuice/vimix-icon-theme.git
+cd Vimix-icon-theme
+./install.sh
+
+git clone https://github.com/vinceliuice/Vimix-cursors.git
+cd Vimix-cursors
+./install.sh
+
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git
+cd Vimix-gtk-themes
+./install.sh
 
 # manual installation softwares: obs-studio, discord
