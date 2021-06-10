@@ -1,5 +1,5 @@
 #!/bin/bash
-# 0 - Configure DNF for faster download:
+echo "0 - Configure DNF for faster download:"
 #     Add the lines:
 sudo sh -c  'echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf'
 sudo sh -c  'echo "fastestmirror=1" >> /etc/dnf/dnf.conf'
@@ -11,30 +11,32 @@ sudo dnf clean all
 
 sudo dnf check-update
 
+sudo dnf update --refresh
+
 sudo dnf upgrade -y
 
 echo "2 - Add the repositories RPM Fusion in Fedora 34:"
-sudo dnf install fedora-workstation-repositories 
+sudo dnf install -y fedora-workstation-repositories 
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Optional:
-# 2.1 - Install nvidia driver:
+echo "2.1 - Install nvidia driver:"
 # Source: https://docs.fedoraproject.org/en-US/quick-docs/how-to-set-nvidia-as-primary-gpu-on-optimus-based-laptops/
+sudo dnf check-update
 sudo dnf update --refresh
+
 sudo dnf install -y gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686 nvidia-driver
 
-# sudo akmods --force
-# sudo dracut --force
+sudo akmods --force
+sudo dracut --force
 
-# sudo reboot
+sudo reboot
 
-# sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
-# sudo nano /etc/X11/xorg.conf.d/nvidia.conf
+sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
+sudo nano /etc/X11/xorg.conf.d/nvidia.conf
 # add the line: 'Option "PrimaryGPU" "yes"' below the line 'Option "BaseMosaic" "on"'
-sudo sed '11 i "       Option "PrimaryGPU" "yes""' /etc/X11/xorg.conf.d/nvidia.conf
-
-# sudo reboot
+sudo reboot
 
 echo "3 - Install additional softwares:" 
 # teamviewer
@@ -98,7 +100,7 @@ echo "Finish. Now you have to change the system settings and install the manual 
 # 6.1 - NOTEBOOK - Enable tap to click in 'Mouse and Touchpad' settings
 # 6.2 - Gnome Tweaks settings:
 # 6.2.0 - Add the extesion in "https://extensions.gnome.org/" User Themes by fmuellner
-# 6.2.1 - Disable suspend when laptop lid is closed in "General"
+# 6.2.1 - Disable "Suspend when laptop lid is closed" in "General"
 # 6.2.2 - Set the themes to Vimix-dark-beryl in "Appearance"
 # 6.2.3 - Change the fonts to Roboto Regular (11) and Roboto Mono Regular (11) in "Fonts"
 # 6.2.4 - Disable the Acceleration Profile in "Keyboard & Mouse" 
