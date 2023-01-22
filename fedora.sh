@@ -18,9 +18,9 @@ sudo dnf upgrade -y
 
 
 echo "2 - Add the repositories RPM Fusion:"
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 
 echo "3 - Installing plugins for playing movies and music"
@@ -31,9 +31,11 @@ sudo dnf install lame\* --exclude=lame-devel
 sudo dnf group upgrade --with-optional Multimedia
 
 
-echo "4 - Install additional softwares:"
+echo "4 - Enable flathub and Install additional softwares:"
 
-sudo dnf install -y libreoffice vlc steam qbittorrent audacity aria2 git neofetch samba gparted code bleachbit cpu-x google-roboto-fonts google-roboto-mono-fonts sassc
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+sudo dnf install -y libreoffice vlc steam htop qbittorrent audacity aria2 git neofetch samba gparted bleachbit cpu-x google-roboto-fonts google-roboto-mono-fonts sassc
 
 
 echo "5 - Install customization (icon, cursor and material design themes)"
