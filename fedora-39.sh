@@ -4,13 +4,13 @@ REL="$(rpm -E %fedora)"
 echo "Hello [$USER], you are running [Fedora $REL]"
 
 update_system() {
-    echo -e "\n Updating your system: \n"
+    echo -e "\n Updating system: \n"
 
     sudo dnf -y update --refresh
 }
 
 update_firmware() {
-    echo -e "\n Updating device with firmware supported by fwupd: \n"
+    echo -e "\n Updating devices with firmware supported by fwupd: \n"
 
     sudo fwupdmgr get-devices
     sudo fwupdmgr refresh --force
@@ -19,7 +19,7 @@ update_firmware() {
 }
 
 update_node() {
-    echo -e "\n Updating Node.JS LTS and package managers: \n"
+    echo -e "\n Updating Node.js LTS and package managers: \n"
 
     bash -ic "nvm install --lts"
     bash -ic "nvm use --lts"
@@ -27,7 +27,7 @@ update_node() {
 }
 
 setup_dnf_faster_download() {
-    echo -e "\n Configuring DNF for faster download: \n"
+    echo -e "\n Configuring DNF for faster downloads: \n"
 
     sudo sh -c 'echo -e "max_parallel_downloads=10\nfastestmirror=True" >> /etc/dnf/dnf.conf'
     sudo dnf -y check-update --refresh
@@ -54,7 +54,7 @@ setup_media_codec() {
     # switch to full FFmpeg
     sudo dnf -y swap ffmpeg-free ffmpeg --allowerasing
 
-    # additional codec for gstreamer and sound-and-video
+    # additional codec for GStreamer and sound-and-video
     sudo dnf -y groupupdate multimedia sound-and-video
 
     # OpenH264 for Firefox
@@ -113,12 +113,12 @@ setup_kernel_args() {
     KERNEL_ARGS="amdgpu.ppfeaturemask=0xffffffff intel_iommu=on"
 
     sudo grubby --remove-args "$KERNEL_ARGS" --update-kernel ALL
-    sudo grubby --args "$KERNEL_ARGS" --update-kernel $KERNEL_PATH
+    sudo grubby --args "$KERNEL_ARGS" --update-kernel "$KERNEL_PATH"
     sudo grubby --info ALL
 }
 
 setup_vscode() {
-    echo -e "\n Installing Visual Studio Code repository: \n"
+    echo -e "\n Installing Visual Studio Code (VSCode): \n"
 
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
     sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
@@ -152,11 +152,11 @@ menu() {
 
     echo " [1] Update system;"
     echo " [2] Update fwupd firmwares;"
-    echo " [3] Update Node.JS and package managers;"
+    echo " [3] Update Node.js and package managers;"
 
     echo " [4] Setup Node Version Manager installation;"
     echo " [5] Setup kernel arguments;"
-    echo " [6] Setup VSCode installation;"
+    echo " [6] Setup Visual Studio Code installation;"
     echo " [7] Setup Docker installation;"
     echo " [8] Setup Docker startup;"
     echo " [9] Setup Docker as non-root user;"
