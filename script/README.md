@@ -4,5 +4,4 @@
 
 ## Observations
 - Script files containing `wipe_on` will FORMAT ALL DATA on `SELECT DISK 0` in `diskpart.exe` when loaded; if you don't want this, use scripts containing `wipe_off`;
-- Script files containing `tpm_on` will NOT IGNORE Windows 11 requirements (RAM, TPM, Secure Boot) when loaded; if you don't want this, use scripts containing `tpm_on`;
-- 
+- Script files containing `tpm_on` will NOT IGNORE Windows 11 requirements (RAM, TPM, Secure Boot) when loaded; if you don't want this, use scripts containing `tpm_off`;
